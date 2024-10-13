@@ -4,7 +4,10 @@ on: [workflow_dispatch]
 
 jobs:
   basic-checkout:
-    runs-on: ubuntu-22.04-ppc64le
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: get installed packages
+        run: |
+          comm -23 <(apt-mark showmanual | sort) <(apt-mark showauto | sort)
