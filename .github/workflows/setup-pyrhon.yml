@@ -6,13 +6,14 @@ jobs:
   basic-checkout:
     runs-on: ubuntu-22.04-ppc64le
     steps:
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          architecture: ppc64le
-          python-version: '3.x'
+      # - name: Use Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
+      #     architecture: ppc64le
+          
       - name: setup-python
         uses: actions/setup-python@v5 
         with:
           architecture: ppc64le
+          python-version: '3.x'
