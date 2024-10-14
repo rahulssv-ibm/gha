@@ -11,6 +11,7 @@ jobs:
         with:
           node-version: 20
           architecture: ppc64le
+          python-version: '3.x'
       - name: setup-python
         uses: actions/setup-python@v5 
         with:
