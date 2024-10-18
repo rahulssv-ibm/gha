@@ -13,7 +13,7 @@ jobs:
       #     architecture: ppc64le
           
       - name: setup python
-      - uses: actions/setup-python@v5 
+        uses: actions/setup-python@v5 
         with:
           architecture: ppc64le
           python-version: 'pypy3.9' 
