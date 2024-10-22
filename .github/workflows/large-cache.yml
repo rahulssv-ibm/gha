@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-22.04-ppc64le]
+        os: [ubuntu-22.04, ubuntu-22.04-ppc64le,ubuntu-osu-ppc64le]
 
     steps:
       # Step 1: Generate large dummy files with random data
