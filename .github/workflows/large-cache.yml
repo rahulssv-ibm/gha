@@ -1,0 +1,34 @@
+name: Cache Large Files Workflow
+
+# Trigger the workflow manually using workflow_dispatch
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-22.04-ppc64le]
+
+    steps:
+      # Step 1: Generate large dummy files with random data
+      - name: Generate Large Dummy Files (Non-Compressible)
+        run: |
+          mkdir -p cache_data
+          echo "Generating a 1GB random data file on ${{ matrix.os }}..."
+          dd if=/dev/urandom of=cache_data/random_file_1GB bs=1M count=1024
+          echo "Generating another 1GB random data file on ${{ matrix.os }}..."
+          dd if=/dev/urandom of=cache_data/random_file_2GB bs=1M count=1024
+          echo "Generated 2GB of random data files on ${{ matrix.os }}."
+      # Step 2: Cache the large files
+      - name: Cache Large Files
+        uses: actions/cache@v4
+        with:
+          path: cache_data
+          key: large-file-cache-${{ matrix.os }}-cache-osu1${{ hashFiles('.github/workflows/large-cache.yml') }}
+          restore-keys: |
+            large-file-cache-${{ matrix.os }}-cache-osu1
+      # Step 3: Confirm the cache is stored
+      - name: List Cached Files
+        run: ls -lh cache_data
