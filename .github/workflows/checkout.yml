@@ -10,4 +10,8 @@ jobs:
         uses: actions/checkout@v3
       - name: get installed packages
         run: |
+          lsb_release -a
+          lscpu
+          free -h
+          df -h
           comm -23 <(apt-mark showmanual | sort) <(apt-mark showauto | sort)
